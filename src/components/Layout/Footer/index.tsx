@@ -1,9 +1,11 @@
-import { FC } from "react";
+import { FC } from "react"
 
-const index :FC = () => {
-  return <footer>
+const index: FC = () => {
+  return (
+    <footer>
       <p>Copyright 2021 News Portal</p>
-  </footer>;
-};
+    </footer>
+  )
+}
 
-export default index;
+export default index
