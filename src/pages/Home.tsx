@@ -6,11 +6,15 @@ import CircularProgress from "@mui/material/CircularProgress"
 import ArticleMain from "../components/ArticleMain/ArticleMain"
 
 interface HomeProps {
-  articles: any[]
+  article: {
+    articles: any[],
+    count: number
+  }
 }
 
-const Home: FC<HomeProps> = ({ articles }) => {
-  const headArticle = articles[0]
+const Home: FC<HomeProps> = ({ article }) => {
+  const { articles, count } = article;
+  // const headArticle = article[0]
 
   if (articles.length === 0) {
     return <CircularProgress />
@@ -18,13 +22,13 @@ const Home: FC<HomeProps> = ({ articles }) => {
   return (
     <section>
       <h2>Hot Topics</h2>
-      <ArticleMain
+      {/* <ArticleMain
         author={headArticle.author}
         desc={headArticle.description}
         title={headArticle.title}
         imgSrc={headArticle.urlToImage}
         time={headArticle.publishedAt}
-      />
+      /> */}
       <h3>Latest News</h3>
       {/* {map => <Article />} */}
     </section>
@@ -33,7 +37,7 @@ const Home: FC<HomeProps> = ({ articles }) => {
 
 const mapStateToProps = (state: any) => {
   return {
-    articles: state.root.articleReducer.articles,
+    article: state.store.articleReducer,
   }
 }
 

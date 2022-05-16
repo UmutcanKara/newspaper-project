@@ -21,7 +21,7 @@ const Layout: FC<LayoutProps> = ({
   getMoreNews,
   isLoggedIn = false,
 }) => {
-  console.log(articles)
+  // console.log(articles)
 
   useEffect(() => {
     if (articles.articles.length === 0) {
@@ -40,7 +40,7 @@ const Layout: FC<LayoutProps> = ({
 
 const mapStateToProps = (state: any) => {
   return {
-    articles: state.root.articleReducer,
+    articles: state.store.articleReducer,
   }
 }
 
