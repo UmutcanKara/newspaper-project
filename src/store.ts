@@ -25,7 +25,7 @@ import rootReducer from "./reducers"
 const store = configureStore({
   reducer: {
     // root: preservedState,
-    store: rootReducer
+    store: rootReducer,
   },
 })
 

@@ -1,34 +1,43 @@
 import axios from "axios"
-import {API_ENDPOINT} from "../secrets"
-import { GET_NEWS, GET_MORE_NEWS } from "./types"
+import { GET_NEWS, GET_CATEGORIES } from "./types"
+import { API_ENDPOINT } from "../secrets"
+import { formatDate } from "../utils/formatDate"
 
-export const getNews = () => (dispatch: any) => {
+import { getNewsType } from "../interfaces/article"
+
+export const getNews: getNewsType =
+  (page = 1, q = "", category = "") =>
+  async (dispatch: any) => {
+    const dateNow = formatDate(new Date())
+    let requestURL = `${API_ENDPOINT}/news/articles/?to_date=${dateNow}&from_date=2021-04-16&page=${page}`
+    if (q) requestURL += `&q=${q}`
+    if (category) requestURL += `&category=${category}`
+
+    const res = await axios.get(requestURL)
+    const { results, nextPage } = res.data
+    dispatch({
+      type: GET_NEWS,
+      payload: { results, nextPage },
+    })
+  }
+
+export const getCategories = () => (dispatch: any) => {
   axios
-    .get(`https://newsapi.org/v2/everything?q=tech&apiKey=${API_ENDPOINT}`)
+    .get(`${API_ENDPOINT}/news/categories`)
     .then(res => {
-      // console.log(res.data.articles);
-
+      const categories = res.data
+      const validData = categories.map((item: any) => {
+        const { id, slug, title } = item
+        return {
+          id,
+          slug,
+          title,
+        }
+      })
       dispatch({
-        type: GET_NEWS,
-        payload: res.data.articles,
+        type: GET_CATEGORIES,
+        payload: validData,
       })
     })
     .catch(err => console.error(err))
-}
-
-export const getMoreNews = (pageNum: number) => (dispatch: any) => {
-  axios
-    .get(
-      `https://newsapi.org/v2/everything?q=tech&page=${pageNum}&apiKey=${API_ENDPOINT}`
-    )
-    .then(res => {
-      const newPageNum = pageNum++
-      dispatch({
-        type: GET_MORE_NEWS,
-        payload: {
-          count: newPageNum,
-          articles: res.data.articles,
-        },
-      })
-    })
 }

@@ -1,34 +1,34 @@
-import { FC, ReactNode, useEffect } from "react"
+import { FC, useEffect } from "react"
 import Footer from "./Footer"
 import PublicHead from "./PublicHeader"
 import PrivateHead from "./PrivateHeader"
 
 import { connect } from "react-redux"
-import { getNews, getMoreNews } from "../../actions/articles"
+import { getNews, getCategories } from "../../actions/articles"
 
-interface LayoutProps {
-  children: ReactNode
-  isLoggedIn?: boolean
-  articles: any
-  getNews: () => void
-  getMoreNews: (num: number) => void
-}
+import { LayoutProps } from "../../interfaces/layout"
 
 const Layout: FC<LayoutProps> = ({
   children,
-  articles,
+  articleReducer,
   getNews,
-  getMoreNews,
+  getCategories,
   isLoggedIn = false,
 }) => {
-  // console.log(articles)
+  const { articles, nextPage, categories } = articleReducer
 
+  // if no articles then get articles
   useEffect(() => {
-    if (articles.articles.length === 0) {
+    if (!articles.length) {
       getNews()
+      console.log("hi")
     }
-  }, []) //eslint-disable-line react-hooks/exhaustive-deps
-
+    if (!categories.length) {
+      getCategories()
+      console.log("ho")
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <>
       {isLoggedIn ? <PrivateHead /> : <PublicHead />}
@@ -40,8 +40,8 @@ const Layout: FC<LayoutProps> = ({
 
 const mapStateToProps = (state: any) => {
   return {
-    articles: state.store.articleReducer,
+    articleReducer: state.store.articleReducer,
   }
 }
 
-export default connect(mapStateToProps, { getNews, getMoreNews })(Layout)
+export default connect(mapStateToProps, { getNews, getCategories })(Layout)

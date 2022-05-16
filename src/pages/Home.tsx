@@ -7,13 +7,13 @@ import ArticleMain from "../components/ArticleMain/ArticleMain"
 
 interface HomeProps {
   article: {
-    articles: any[],
+    articles: any[]
     count: number
   }
 }
 
 const Home: FC<HomeProps> = ({ article }) => {
-  const { articles, count } = article;
+  const { articles, count } = article
   // const headArticle = article[0]
 
   if (articles.length === 0) {
