@@ -1,2 +1,2 @@
-const API_KEY = process.env.REACT_APP_API_KEY
-export default API_KEY
+export const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
+

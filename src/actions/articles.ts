@@ -1,10 +1,10 @@
 import axios from "axios"
-import API_KEY from "../secrets"
+import {API_ENDPOINT} from "../secrets"
 import { GET_NEWS, GET_MORE_NEWS } from "./types"
 
 export const getNews = () => (dispatch: any) => {
   axios
-    .get(`https://newsapi.org/v2/everything?q=tech&apiKey=${API_KEY}`)
+    .get(`https://newsapi.org/v2/everything?q=tech&apiKey=${API_ENDPOINT}`)
     .then(res => {
       // console.log(res.data.articles);
 
@@ -19,7 +19,7 @@ export const getNews = () => (dispatch: any) => {
 export const getMoreNews = (pageNum: number) => (dispatch: any) => {
   axios
     .get(
-      `https://newsapi.org/v2/everything?q=tech&page=${pageNum}&apiKey=${API_KEY}`
+      `https://newsapi.org/v2/everything?q=tech&page=${pageNum}&apiKey=${API_ENDPOINT}`
     )
     .then(res => {
       const newPageNum = pageNum++
