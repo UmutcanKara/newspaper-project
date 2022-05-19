@@ -3,7 +3,7 @@ import { GET_NEWS, GET_CATEGORIES } from "../actions/types"
 import {
   ArticleStateInterface,
   ArticleReducerInterface,
-} from "./../interfaces/article"
+} from "../interfaces/reducerInterfaces/article"
 
 const initialState: ArticleStateInterface = {
   articles: [],

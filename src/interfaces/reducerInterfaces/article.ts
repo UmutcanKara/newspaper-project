@@ -12,12 +12,14 @@ export interface ArticleStateInterface {
     entertainment: number
     business: number
   }
-  categories: string[]
+  categories: {
+    id: number
+    slug: string
+    title: string
+  }[]
 }
 
 export type ArticleReducerInterface = (
   state: ArticleStateInterface,
   action: AnyAction
 ) => ArticleStateInterface
-
-export type getNewsType = (page?: number, q?: string, category?: string) => void

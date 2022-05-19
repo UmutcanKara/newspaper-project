@@ -6,7 +6,7 @@ import PrivateHead from "./PrivateHeader"
 import { connect } from "react-redux"
 import { getNews, getCategories } from "../../actions/articles"
 
-import { LayoutProps } from "../../interfaces/layout"
+import { LayoutProps } from "../../interfaces/componentInterfaces/layout"
 
 const Layout: FC<LayoutProps> = ({
   children,
@@ -21,11 +21,9 @@ const Layout: FC<LayoutProps> = ({
   useEffect(() => {
     if (!articles.length) {
       getNews()
-      console.log("hi")
     }
     if (!categories.length) {
       getCategories()
-      console.log("ho")
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

@@ -3,7 +3,7 @@ import { GET_NEWS, GET_CATEGORIES } from "./types"
 import { API_ENDPOINT } from "../secrets"
 import { formatDate } from "../utils/formatDate"
 
-import { getNewsType } from "../interfaces/article"
+import { getNewsType } from "../interfaces/actionInterfaces/article"
 
 export const getNews: getNewsType =
   (page = 1, q = "", category = "") =>

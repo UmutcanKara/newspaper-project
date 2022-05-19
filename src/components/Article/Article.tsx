@@ -1,4 +1,5 @@
 import React, { FC } from "react"
+import { dateCalc } from "../../utils/dateCalculator"
 
 interface ArticleProps {
   imgSrc: string
@@ -9,29 +10,12 @@ interface ArticleProps {
 
 const Article: FC<ArticleProps> = ({ imgSrc, title, time, author }) => {
   const currentTime = new Date()
+
   const dateDifference: number = (currentTime.getTime() - time.getTime()) / 1000
-  let displayedTimeDifference: string = ""
+  let displayedTimeDifference: string = dateCalc(dateDifference)
 
   // Date Calculations  START
-  if (dateDifference < 3600) {
-    displayedTimeDifference = `${dateDifference / 60} mins ago`
-  } else if (3600 < dateDifference && dateDifference < 3600 * 24) {
-    displayedTimeDifference = `${dateDifference / 3600} hours ago`
-  } else if (3600 * 24 < dateDifference && dateDifference < 3600 * 24 * 7) {
-    displayedTimeDifference = `${dateDifference / (3600 * 24)} days ago`
-  } else if (
-    3600 * 24 * 7 < dateDifference &&
-    dateDifference < 3600 * 24 * 30
-  ) {
-    displayedTimeDifference = `${dateDifference / (3600 * 24 * 7)} weeks ago`
-  } else if (
-    3600 * 24 * 30 < dateDifference &&
-    dateDifference < 3600 * 24 * 365
-  ) {
-    displayedTimeDifference = `${dateDifference / (3600 * 24 * 30)} months ago`
-  } else {
-    displayedTimeDifference = `${dateDifference / (3600 * 24 * 365)} years ago`
-  }
+
   // Date Calculations    END
 
   return (

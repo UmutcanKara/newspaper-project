@@ -1,0 +1,12 @@
+.button{
+    background-color: transparent;
+    border: none;
+    color: #121221;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: "Playfair Display";
+    align-self: center;
+    vertical-align: middle;
+    height: 100%;
+    cursor: pointer;
+}
