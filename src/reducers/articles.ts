@@ -1,4 +1,4 @@
-import { GET_NEWS, GET_CATEGORIES } from "../actions/types"
+import { GET_NEWS, GET_CATEGORIES, GET_MORE_NEWS } from "../actions/types"
 
 import {
   ArticleStateInterface,
@@ -27,6 +27,12 @@ const articleReducer: ArticleReducerInterface = (
   const { type, payload } = action
   switch (type) {
     case GET_NEWS:
+      return {
+        ...state,
+        articles: [...payload.results],
+        nextPage: payload.nextPage,
+      }
+    case GET_MORE_NEWS:
       return {
         ...state,
         articles: [...state.articles, ...payload.results],

@@ -13,6 +13,7 @@ import {
 } from "../../../interfaces/componentInterfaces/layout"
 
 import styles from "../../../styles/components/layout.module.css"
+import { Link } from "react-router-dom"
 
 const PublicHead: FC<ILayoutPubHeader> = ({ articles, getNews }) => {
   const [activeButton, setActiveButton] = useState(0)
@@ -30,21 +31,16 @@ const PublicHead: FC<ILayoutPubHeader> = ({ articles, getNews }) => {
   }
   return (
     <nav className={styles.nav}>
+      {/* <Link to={{
+        pathname: '/'
+      }}> */}
       <div className="logo">
         <h3 className={styles.logo}>
           <span className={styles.span}>News</span> Portal
         </h3>
       </div>
+      {/* </Link> */}
       <div className={styles.categoryContainer}>
-        {activeButton === 0 ? (
-          <Button
-            onClick={() => onClickHandler(0)}
-            className={styles.categoryActive}>
-            All
-          </Button>
-        ) : (
-          <Button onClick={() => onClickHandler(0)}>All</Button>
-        )}
         {categories.map(category => {
           const { id, slug, title } = category
           return activeButton === id ? (

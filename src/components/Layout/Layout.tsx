@@ -15,7 +15,7 @@ const Layout: FC<LayoutProps> = ({
   getCategories,
   isLoggedIn = false,
 }) => {
-  const { articles, nextPage, categories } = articleReducer
+  const { articles, categories } = articleReducer
 
   // if no articles then get articles
   useEffect(() => {

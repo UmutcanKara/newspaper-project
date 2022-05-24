@@ -1,52 +1,36 @@
-import React, { FC } from "react"
+import { FC } from "react"
+import { dateCalc } from "../../utils/dateCalculator"
 
-interface ArticleProps {
-  imgSrc: string
-  title: string
-  desc: string
-  time: Date
-  author: string
-}
+import styles from "../../styles/components/articleMain.module.css"
+import { ArticleMainProps } from "../../interfaces/componentInterfaces/articles"
 
-const Article: FC<ArticleProps> = ({ imgSrc, title, desc, time, author }) => {
+const Article: FC<ArticleMainProps> = ({
+  imgSrc,
+  title,
+  desc,
+  time,
+  author,
+}) => {
   const currentTime = new Date()
-  const timeDate = new Date(time)
+  const articleTime = new Date(time)
   const dateDifference: number =
-    (currentTime.getTime() - timeDate.getTime()) / 1000
-  let displayedTimeDifference: string = ""
+    (currentTime.getTime() - articleTime.getTime()) / 1000
 
-  // Date Calculations  START
-  if (dateDifference < 3600) {
-    displayedTimeDifference = `${dateDifference / 60} mins ago`
-  } else if (3600 < dateDifference && dateDifference < 3600 * 24) {
-    displayedTimeDifference = `${dateDifference / 3600} hours ago`
-  } else if (3600 * 24 < dateDifference && dateDifference < 3600 * 24 * 7) {
-    displayedTimeDifference = `${dateDifference / (3600 * 24)} days ago`
-  } else if (
-    3600 * 24 * 7 < dateDifference &&
-    dateDifference < 3600 * 24 * 30
-  ) {
-    displayedTimeDifference = `${dateDifference / (3600 * 24 * 7)} weeks ago`
-  } else if (
-    3600 * 24 * 30 < dateDifference &&
-    dateDifference < 3600 * 24 * 365
-  ) {
-    displayedTimeDifference = `${dateDifference / (3600 * 24 * 30)} months ago`
-  } else {
-    displayedTimeDifference = `${dateDifference / (3600 * 24 * 365)} years ago`
-  }
-  // Date Calculations    END
+  const displayedTimeDifference = dateCalc(dateDifference)
+  console.log(imgSrc)
 
   return (
-    <article>
-      <div style={{ backgroundImage: `url(${imgSrc})` }}>
+    <article className={styles.article}>
+      <div
+        style={{ backgroundImage: `url(${imgSrc})` }}
+        className={styles.image}>
         <h4> {title} </h4>
-        <div>
+        <div className={styles.miscContainer}>
           <p> {displayedTimeDifference} </p>
-          <p> {author} </p>
+          <p> {`${author.charAt(0).toUpperCase()}${author.slice(1)}`} </p>
         </div>
       </div>
-      <div>
+      <div className={styles.desc}>
         <p> {desc} </p>
         {/* put link and redirect */}
       </div>

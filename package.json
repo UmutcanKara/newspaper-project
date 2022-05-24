@@ -24,7 +24,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prettier-format": "prettier ./src --config .prettierrc.json --write",
+    "format": "prettier ./src --config .prettierrc.json --write",
     "lint": "eslint ./src --ext .ts,.tsx,.js,jsx",
     "lint:fix": "eslint ./src --ext .ts,.tsx,.js,jsx --fix",
     "typecheck": "tsc --noEmit"
@@ -73,8 +73,8 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
-      "npm run prettier-format",
-      "npm run lint:fix"
+      "yarn format",
+      "yarn lint:fix"
     ]
   }
 }

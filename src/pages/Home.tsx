@@ -7,6 +7,9 @@ import ArticleMain from "../components/ArticleMain/ArticleMain"
 
 import { IHome } from "../interfaces/pageInterfaces/home"
 
+import styles from "../styles/pages/home.module.css"
+import Button from "../components/Button/Button"
+
 const Home: FC<IHome> = ({ article }) => {
   const { articles, count } = article
   const headArticle = articles[0]
@@ -17,29 +20,33 @@ const Home: FC<IHome> = ({ article }) => {
   }
   return (
     <section>
-      <h2>Hot Topics</h2>
+      <h2 className={styles.hotTopic}>Hot Topics</h2>
       <ArticleMain
-        author={headArticle.author}
+        author={headArticle.source_id}
         desc={headArticle.description}
         title={headArticle.title}
-        imgSrc={headArticle.urlToImage}
+        imgSrc={headArticle.image_url}
         time={headArticle.pubDate}
       />
-      <h3>Latest News</h3>
-      {articles.map((article, idx) => {
-        const { author, title, urlToImage, pubDate } = article
-        if (idx === 0) return null
-        return (
-          <Article
-            key={`${title}-${idx}`}
-            author={author}
-            imgSrc={urlToImage}
-            time={pubDate}
-            title={title}
-          />
-        )
-      })}
-      {/* {map => <Article />} */}
+      <h3 className={styles.latest}>Latest News</h3>
+      <div className={styles.articles}>
+        {articles.map((article, idx) => {
+          const { source_id, title, image_url, pubDate } = article
+          if (idx === 0) return null
+          return (
+            <Article
+              key={`${title}-${idx}`}
+              author={source_id}
+              imgSrc={image_url}
+              time={pubDate}
+              title={title}
+            />
+          )
+        })}
+      </div>
+      <div className={styles.buttonCont}>
+        <Button onClick={() => console.log("Loads!")}>Load More</Button>
+      </div>
     </section>
   )
 }
