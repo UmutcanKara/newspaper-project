@@ -31,15 +31,13 @@ const PublicHead: FC<ILayoutPubHeader> = ({ articles, getNews }) => {
   }
   return (
     <nav className={styles.nav}>
-      {/* <Link to={{
-        pathname: '/'
-      }}> */}
       <div className="logo">
-        <h3 className={styles.logo}>
-          <span className={styles.span}>News</span> Portal
-        </h3>
+        <Link to="/">
+          <h3 className={styles.logo}>
+            <span className={styles.span}>News</span> Portal
+          </h3>
+        </Link>
       </div>
-      {/* </Link> */}
       <div className={styles.categoryContainer}>
         {categories.map(category => {
           const { id, slug, title } = category
@@ -55,9 +53,6 @@ const PublicHead: FC<ILayoutPubHeader> = ({ articles, getNews }) => {
               {title}
             </Button>
           )
-          //   return (<Button key={id} onClick={() => onClickHandler(id, slug)} >
-          //     {title}
-          // </Button>)
         })}
       </div>
       <div className={styles.svgContainer}>

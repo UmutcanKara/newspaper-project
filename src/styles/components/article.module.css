@@ -1,0 +1,25 @@
+.image {
+  aspect-ratio: 3/2;
+  width: 100%;
+  border-radius: 8px;
+
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.miscCont {
+  display: flex;
+}
+.miscCont > * {
+  margin-right: 3%;
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 12px;
+}
