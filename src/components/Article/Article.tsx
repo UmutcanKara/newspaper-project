@@ -1,46 +1,32 @@
 import React, { FC } from "react"
 
-interface ArticleProps {
-  imgSrc: string
-  title: string
-  time: Date
-  author: string
-}
+import { dateCalc } from "../../utils/dateCalculator"
+import { minimalize } from "../../utils/stringMinimalize"
+
+import styles from "../../styles/components/article.module.css"
+
+import { ArticleProps } from "../../interfaces/componentInterfaces/articles"
 
 const Article: FC<ArticleProps> = ({ imgSrc, title, time, author }) => {
   const currentTime = new Date()
-  const dateDifference: number = (currentTime.getTime() - time.getTime()) / 1000
-  let displayedTimeDifference: string = ""
+  const articleTime = new Date(time)
 
-  // Date Calculations  START
-  if (dateDifference < 3600) {
-    displayedTimeDifference = `${dateDifference / 60} mins ago`
-  } else if (3600 < dateDifference && dateDifference < 3600 * 24) {
-    displayedTimeDifference = `${dateDifference / 3600} hours ago`
-  } else if (3600 * 24 < dateDifference && dateDifference < 3600 * 24 * 7) {
-    displayedTimeDifference = `${dateDifference / (3600 * 24)} days ago`
-  } else if (
-    3600 * 24 * 7 < dateDifference &&
-    dateDifference < 3600 * 24 * 30
-  ) {
-    displayedTimeDifference = `${dateDifference / (3600 * 24 * 7)} weeks ago`
-  } else if (
-    3600 * 24 * 30 < dateDifference &&
-    dateDifference < 3600 * 24 * 365
-  ) {
-    displayedTimeDifference = `${dateDifference / (3600 * 24 * 30)} months ago`
-  } else {
-    displayedTimeDifference = `${dateDifference / (3600 * 24 * 365)} years ago`
-  }
-  // Date Calculations    END
+  const dateDifference: number =
+    (currentTime.getTime() - articleTime.getTime()) / 1000
+  let displayedTimeDifference: string = dateCalc(dateDifference)
+
+  const minimalizedTitle = minimalize(title)
 
   return (
     <article>
-      <div style={{ backgroundImage: `url(${imgSrc})` }} />
-      <h4>{title}</h4>
-      <div>
+      <div
+        style={{ backgroundImage: `url(${imgSrc})` }}
+        className={styles.image}
+      />
+      <h4 className={styles.title}>{`${minimalizedTitle}...`}</h4>
+      <div className={styles.miscCont}>
         <p> {displayedTimeDifference} </p>
-        <p> {author} </p>
+        <p> {`${author.charAt(0).toUpperCase()}${author.slice(1)}`} </p>
       </div>
     </article>
   )

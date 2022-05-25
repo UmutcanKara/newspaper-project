@@ -1,25 +1,48 @@
-import { AnyAction } from "redux"
-import { GET_NEWS, GET_MORE_NEWS } from "../actions/types"
+import { GET_NEWS, GET_CATEGORIES, GET_MORE_NEWS } from "../actions/types"
 
-import { ArticleStateInterface } from "./../interfaces/article"
+import {
+  ArticleStateInterface,
+  ArticleReducerInterface,
+} from "../interfaces/reducerInterfaces/article"
 
 const initialState: ArticleStateInterface = {
   articles: [],
-  count: 1,
+  nextPage: 1,
+  categoryCount: {
+    business: 0,
+    entertainment: 0,
+    general: 0,
+    health: 0,
+    science: 0,
+    sports: 0,
+    technology: 0,
+  },
+  categories: [],
 }
 
-const articleReducer = (state = initialState, action: AnyAction) => {
+const articleReducer: ArticleReducerInterface = (
+  state = initialState,
+  action
+) => {
   const { type, payload } = action
   switch (type) {
     case GET_NEWS:
-      return { ...state, articles: payload }
-
+      return {
+        ...state,
+        articles: [...payload.results],
+        nextPage: payload.nextPage,
+      }
     case GET_MORE_NEWS:
       return {
-        count: payload.count,
-        articles: [...state.articles, ...payload.articles],
+        ...state,
+        articles: [...state.articles, ...payload.results],
+        nextPage: payload.nextPage,
       }
-
+    case GET_CATEGORIES:
+      return {
+        ...state,
+        categories: payload,
+      }
     default:
       return state
   }
