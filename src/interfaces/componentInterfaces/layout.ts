@@ -1,4 +1,4 @@
-import { getNewsType, getMoreNewsType } from "../actionInterfaces/article"
+import { getNewsType } from "../actionInterfaces/article"
 import { ArticleStateInterface } from "../reducerInterfaces/article"
 import { ReactNode } from "react"
 
@@ -17,10 +17,6 @@ export interface ILayoutPubHeader {
   getNews: getNewsType
 }
 export interface ILayoutPrivHeader {}
-
-export interface ILayoutFooter {
-  getMoreNews: getMoreNewsType
-}
 
 // Util Types
 export type TCategories = {

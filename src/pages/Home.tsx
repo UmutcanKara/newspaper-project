@@ -11,7 +11,7 @@ import styles from "../styles/pages/home.module.css"
 import Button from "../components/Button/Button"
 
 const Home: FC<IHome> = ({ article }) => {
-  const { articles, count } = article
+  const { articles } = article
   const headArticle = articles[0]
   // const headArticle = article[0]
 
@@ -21,6 +21,9 @@ const Home: FC<IHome> = ({ article }) => {
   return (
     <section>
       <h2 className={styles.hotTopic}>Hot Topics</h2>
+      <form>
+        <input type="text" />
+      </form>
       <ArticleMain
         author={headArticle.source_id}
         desc={headArticle.description}
